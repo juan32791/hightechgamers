@@ -4,19 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HighTech Gamer – Gaming News & Guides</title>
-    <meta name="description" content="HighTech Gamer – auto-generated gaming articles with Adsterra banners every 2 paragraphs, mobile-optimized and SEO-ready.">
+    <meta name="description" content="HighTech Gamer – gaming articles with Adsterra banners and direct link monetization.">
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; background:#0f172a; color:white; line-height: 1.6; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; background:#0f172a; color:white; line-height: 1.6; cursor: pointer; }
         header{ background:#020617; padding:40px 20px; text-align:center; border-bottom: 3px solid #38bdf8; }
-        nav{ background:#1e293b; padding:15px; text-align:center; position: sticky; top: 0; z-index: 100; }
+        nav{ background:#1e293b; padding:15px; text-align:center; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
         nav a{ color:#cbd5e1; margin:0 15px; text-decoration:none; font-weight: bold; transition: color 0.3s; }
         nav a:hover{ color:#38bdf8; }
         .container{ max-width:800px; margin:auto; padding:20px; }
         .post{ background:#1e293b; padding:25px; margin-bottom:40px; border-radius:12px; border: 1px solid #334155; }
         .post h2{ color:#38bdf8; margin-top: 0; font-size: 1.8rem; }
-        .ad{ text-align:center; margin:30px 0; min-height: 250px; display: flex; justify-content: center; align-items: center; }
+        .ad{ text-align:center; margin:30px 0; min-height: 250px; display: flex; justify-content: center; align-items: center; background: rgba(255,255,255,0.03); border-radius: 8px; }
         iframe { max-width: 100%; border: none; }
         footer{ background:#020617; padding:40px 20px; text-align:center; margin-top:40px; color: #64748b; }
+        
+        /* Loading Spinner */
+        #loader { display: none; text-align: center; padding: 20px; }
+        .spinner {
+            width: 40px; height: 40px;
+            border: 4px solid rgba(56, 189, 248, 0.1);
+            border-left-color: #38bdf8;
+            border-radius: 50%;
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
         @media(max-width:768px){
             .container{ padding:15px; }
             .post{ padding:15px; }
@@ -41,12 +54,34 @@
 
 <div class="container" id="content"></div>
 
+<div id="loader">
+    <div class="spinner"></div>
+    <p style="color: #38bdf8; font-size: 14px;">Loading more content...</p>
+</div>
+
 <footer>
     <div class="ad" id="footerAd"></div>
     <p>© 2026 HighTech Gamer - All Rights Reserved</p>
 </footer>
 
 <script>
+// --------------------------------------------------------
+// ADSTERRA DIRECT LINK SETUP
+// --------------------------------------------------------
+const directLink = "https://www.effectivegatecpm.com/im9a7edp33?key=06fb04d31e50b081ace020ecfa3f607a"; 
+
+// Triggers the pop-under on the very first click anywhere on the page
+document.addEventListener('click', function() {
+    if (!window.popDone) {
+        const win = window.open(directLink, '_blank');
+        if (win) {
+            win.blur();
+            window.focus();
+            window.popDone = true; 
+        }
+    }
+}, { once: true });
+
 // ------------------------
 // Content Data
 // ------------------------
@@ -54,11 +89,7 @@ const titles = [
     "Top Open World Games You Must Play", "Hidden Secrets in RPG Games",
     "Best Indie Games This Year", "Why Multiplayer Games Dominate",
     "Best Gaming Setup Tips", "Retro Games Still Worth Playing",
-    "Future of Cloud Gaming", "Best Strategy Games Ever",
-    "Gaming Graphics Evolution", "Upcoming Games to Watch",
-    "Most Addictive Mobile Games", "How VR is Changing Gaming",
-    "Best Console Games This Year", "Top Indie Developers to Follow",
-    "Gaming Hardware Upgrades You Need"
+    "Future of Cloud Gaming", "Best Strategy Games Ever"
 ];
 
 const paragraphs = [
@@ -67,30 +98,21 @@ const paragraphs = [
     "Competitive multiplayer games attract millions of players worldwide.",
     "Indie developers create some of the most creative gaming experiences.",
     "Gaming communities grow thanks to streaming and esports.",
-    "Modern engines allow developers to build realistic worlds.",
-    "Exploration and storytelling make games unforgettable.",
-    "Many gamers build high performance setups for better gameplay.",
-    "Upcoming releases promise new innovations and challenges.",
-    "Game streaming and eSports are more popular than ever."
+    "Modern engines allow developers to build realistic worlds."
 ];
 
 // ------------------------
-// Adsterra Dynamic Generator
+// Adsterra Banner Generator (Iframe Method)
 // ------------------------
 function createAd() {
     const adWrapper = document.createElement("div");
     adWrapper.className = "ad";
 
-    // Create iframe to isolate Adsterra scripts
     const iframe = document.createElement('iframe');
-    iframe.width = "300";
-    iframe.height = "250";
-    iframe.frameBorder = "0";
-    iframe.scrolling = "no";
-    
+    iframe.width = "300"; iframe.height = "250";
+    iframe.frameBorder = "0"; iframe.scrolling = "no";
     adWrapper.appendChild(iframe);
 
-    // Adsterra Configuration
     const adScriptConfig = `
         var atOptions = {
             'key' : '6a3ec73b0a248025bdcb172661c1ee7f',
@@ -102,18 +124,19 @@ function createAd() {
     `;
     const adScriptSrc = "https://www.highperformanceformat.com/6a3ec73b0a248025bdcb172661c1ee7f/invoke.js";
 
-    // Injecting scripts into the Iframe
     setTimeout(() => {
-        const doc = iframe.contentWindow.document;
-        doc.open();
-        doc.write(`
-            <body style="margin:0; padding:0; display:flex; justify-content:center;">
-                <script type="text/javascript">${adScriptConfig}<\/script>
-                <script type="text/javascript" src="${adScriptSrc}"><\/script>
-            </body>
-        `);
-        doc.close();
-    }, 100);
+        try {
+            const doc = iframe.contentWindow.document;
+            doc.open();
+            doc.write(`
+                <body style="margin:0; padding:0; display:flex; justify-content:center; background:transparent;">
+                    <script type="text/javascript">${adScriptConfig}<\/script>
+                    <script type="text/javascript" src="${adScriptSrc}"><\/script>
+                </body>
+            `);
+            doc.close();
+        } catch (e) { console.error("Ad failed"); }
+    }, 200);
 
     return adWrapper;
 }
@@ -129,25 +152,28 @@ function createPost() {
     heading.innerText = titles[Math.floor(Math.random() * titles.length)];
     post.appendChild(heading);
 
-    // Add 6 paragraphs, with an ad every 2 paragraphs
     for (let i = 1; i <= 6; i++) {
         const p = document.createElement("p");
         p.innerText = paragraphs[Math.floor(Math.random() * paragraphs.length)];
         post.appendChild(p);
 
+        // Adds an ad every 2 paragraphs
         if (i % 2 === 0) {
             post.appendChild(createAd());
         }
     }
-
     return post;
 }
 
 // ------------------------
-// Core Logic
+// Core Logic & Infinite Scroll
 // ------------------------
+const content = document.getElementById("content");
+const loader = document.getElementById("loader");
+let postsLoaded = 5;
+let isLoading = false;
+
 function loadPosts(num) {
-    const content = document.getElementById("content");
     for (let i = 0; i < num; i++) {
         content.appendChild(createPost());
     }
@@ -156,24 +182,23 @@ function loadPosts(num) {
 // Initial Load
 loadPosts(5);
 
-// Infinite Scroll Logic
-let postsLoaded = 5;
-let isThrottled = false;
-
 window.addEventListener("scroll", () => {
-    if (isThrottled) return;
+    if (isLoading) return;
 
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 800 && postsLoaded < 100) {
-        isThrottled = true;
-        loadPosts(2);
-        postsLoaded += 2;
-        
-        // Prevents too many simultaneous calls
-        setTimeout(() => { isThrottled = false; }, 500);
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 900 && postsLoaded < 100) {
+        isLoading = true;
+        loader.style.display = "block";
+
+        setTimeout(() => {
+            loadPosts(2);
+            postsLoaded += 2;
+            loader.style.display = "none";
+            isLoading = false;
+        }, 800); 
     }
 });
 
-// Load Footer Ad
+// Footer Ad
 document.getElementById("footerAd").appendChild(createAd());
 </script>
 
