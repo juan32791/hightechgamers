@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HighTech Gamer – Gaming News & Guides</title>
+
+<meta name="description" content="Gaming news, reviews, and guides for PC, console and indie games.">
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#0f172a;
+color:white;
+}
+
+header{
+background:#020617;
+padding:20px;
+text-align:center;
+}
+
+nav{
+background:#1e293b;
+padding:10px;
+text-align:center;
+}
+
+nav a{
+color:white;
+margin:10px;
+text-decoration:none;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:20px;
+}
+
+.post{
+background:#1e293b;
+padding:20px;
+margin-bottom:30px;
+border-radius:8px;
+}
+
+.post h2{
+color:#38bdf8;
+}
+
+.ad{
+text-align:center;
+margin:30px 0;
+}
+
+footer{
+background:#020617;
+padding:20px;
+text-align:center;
+margin-top:40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>HighTech Gamer</h1>
+<p>Gaming News • Reviews • Guides</p>
+</header>
+
+<nav>
+<a href="#">Home</a>
+<a href="#">PC Gaming</a>
+<a href="#">Console</a>
+<a href="#">Indie Games</a>
+<a href="#">Reviews</a>
+</nav>
+
+<div class="container" id="content"></div>
+
+<footer>
+
+<div class="ad" id="footerAd"></div>
+
+<p>© 2026 HighTech Gamer</p>
+
+</footer>
+
+<script>
+
+const titles=[
+"Top Open World Games You Must Play",
+"Hidden Secrets in RPG Games",
+"Best Indie Games This Year",
+"Why Multiplayer Games Dominate",
+"Best Gaming Setup Tips",
+"Retro Games Still Worth Playing",
+"Future of Cloud Gaming",
+"Best Strategy Games Ever",
+"Gaming Graphics Evolution",
+"Upcoming Games to Watch"
+];
+
+const paragraphs=[
+"Gaming technology continues to improve with better graphics and immersive gameplay.",
+"Players enjoy massive open worlds filled with quests and secrets.",
+"Competitive multiplayer games attract millions of players worldwide.",
+"Indie developers create some of the most creative gaming experiences.",
+"Gaming communities grow thanks to streaming and esports.",
+"Modern engines allow developers to build realistic worlds.",
+"Exploration and storytelling make games unforgettable.",
+"Many gamers build high performance setups for better gameplay."
+];
+
+function createAd(){
+
+let ad=document.createElement("div");
+ad.className="ad";
+
+let script1=document.createElement("script");
+script1.innerHTML=`
+atOptions = {
+'key' : 'eb64514c8ad66e0c2f82e4a5fee98217',
+'format' : 'iframe',
+'height' : 250,
+'width' : 300,
+'params' : {}
+};
+`;
+
+let script2=document.createElement("script");
+script2.src="https://www.highperformanceformat.com/eb64514c8ad66e0c2f82e4a5fee98217/invoke.js";
+
+ad.appendChild(script1);
+ad.appendChild(script2);
+
+return ad;
+
+}
+
+function createPost(){
+
+let post=document.createElement("div");
+post.className="post";
+
+let title=titles[Math.floor(Math.random()*titles.length)];
+
+let heading=document.createElement("h2");
+heading.innerText=title;
+
+post.appendChild(heading);
+
+for(let i=1;i<=6;i++){
+
+let p=document.createElement("p");
+p.innerText=paragraphs[Math.floor(Math.random()*paragraphs.length)];
+
+post.appendChild(p);
+
+if(i%2===0){
+
+post.appendChild(createAd());
+
+}
+
+}
+
+return post;
+
+}
+
+function loadPosts(num){
+
+let content=document.getElementById("content");
+
+for(let i=0;i<num;i++){
+
+content.appendChild(createPost());
+
+}
+
+}
+
+loadPosts(6);
+
+window.addEventListener("scroll",()=>{
+
+if(window.innerHeight + window.scrollY >= document.body.offsetHeight-200){
+
+loadPosts(3);
+
+}
+
+});
+
+document.getElementById("footerAd").appendChild(createAd());
+
+</script>
+
+</body>
+</html>
