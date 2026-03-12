@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HighTech Gamer – Gaming News & Guides</title>
-<meta name="description" content="Gaming news, reviews, and guides for PC, console and indie games.">
+<meta name="description" content="HighTech Gamer – auto-generated gaming articles with Adsterra banners every 2 paragraphs, mobile-optimized and SEO-ready.">
 <style>
 body { font-family: Arial, sans-serif; margin:0; background:#0f172a; color:white; }
 header{ background:#020617; padding:20px; text-align:center; }
@@ -44,7 +44,10 @@ footer{ background:#020617; padding:20px; text-align:center; margin-top:40px; }
 </footer>
 
 <script>
-const titles = [
+// ------------------------
+// Auto-generated content
+// ------------------------
+const titles=[
 "Top Open World Games You Must Play",
 "Hidden Secrets in RPG Games",
 "Best Indie Games This Year",
@@ -54,10 +57,15 @@ const titles = [
 "Future of Cloud Gaming",
 "Best Strategy Games Ever",
 "Gaming Graphics Evolution",
-"Upcoming Games to Watch"
+"Upcoming Games to Watch",
+"Most Addictive Mobile Games",
+"How VR is Changing Gaming",
+"Best Console Games This Year",
+"Top Indie Developers to Follow",
+"Gaming Hardware Upgrades You Need"
 ];
 
-const paragraphs = [
+const paragraphs=[
 "Gaming technology continues to improve with better graphics and immersive gameplay.",
 "Players enjoy massive open worlds filled with quests and secrets.",
 "Competitive multiplayer games attract millions of players worldwide.",
@@ -65,15 +73,21 @@ const paragraphs = [
 "Gaming communities grow thanks to streaming and esports.",
 "Modern engines allow developers to build realistic worlds.",
 "Exploration and storytelling make games unforgettable.",
-"Many gamers build high performance setups for better gameplay."
+"Many gamers build high performance setups for better gameplay.",
+"Upcoming releases promise new innovations and challenges.",
+"Game streaming and eSports are more popular than ever."
 ];
 
-function createAd() {
-  const ad = document.createElement("div");
-  ad.className = "ad";
+// ------------------------
+// Adsterra script creator
+// ------------------------
+function createAd(){
+  const ad=document.createElement("div");
+  ad.className="ad";
 
-  const script1 = document.createElement("script");
-  script1.innerHTML = `
+  // Script must be created via DOM for dynamic execution
+  const script1=document.createElement("script");
+  script1.innerHTML=`
 atOptions = {
 'key' : '6a3ec73b0a248025bdcb172661c1ee7f',
 'format' : 'iframe',
@@ -82,9 +96,8 @@ atOptions = {
 'params' : {}
 };
 `;
-
-  const script2 = document.createElement("script");
-  script2.src = "https://www.highperformanceformat.com/6a3ec73b0a248025bdcb172661c1ee7f/invoke.js";
+  const script2=document.createElement("script");
+  script2.src="https://www.highperformanceformat.com/6a3ec73b0a248025bdcb172661c1ee7f/invoke.js";
 
   ad.appendChild(script1);
   ad.appendChild(script2);
@@ -92,20 +105,23 @@ atOptions = {
   return ad;
 }
 
-function createPost() {
-  const post = document.createElement("div");
-  post.className = "post";
+// ------------------------
+// Create single post
+// ------------------------
+function createPost(){
+  const post=document.createElement("div");
+  post.className="post";
 
-  const heading = document.createElement("h2");
-  heading.innerText = titles[Math.floor(Math.random() * titles.length)];
+  const heading=document.createElement("h2");
+  heading.innerText=titles[Math.floor(Math.random()*titles.length)];
   post.appendChild(heading);
 
-  for (let i = 1; i <= 6; i++) {
-    const p = document.createElement("p");
-    p.innerText = paragraphs[Math.floor(Math.random() * paragraphs.length)];
+  for(let i=1;i<=6;i++){
+    const p=document.createElement("p");
+    p.innerText=paragraphs[Math.floor(Math.random()*paragraphs.length)];
     post.appendChild(p);
 
-    if (i % 2 === 0) {
+    if(i%2===0){
       post.appendChild(createAd());
     }
   }
@@ -113,20 +129,25 @@ function createPost() {
   return post;
 }
 
-function loadPosts(num) {
-  const content = document.getElementById("content");
-  for (let i = 0; i < num; i++) {
+// ------------------------
+// Load multiple posts
+// ------------------------
+function loadPosts(num){
+  const content=document.getElementById("content");
+  for(let i=0;i<num;i++){
     content.appendChild(createPost());
   }
 }
 
-// Initial load
-loadPosts(6);
+// Initial posts
+loadPosts(10);
 
-// Infinite scroll
-window.addEventListener("scroll", () => {
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
-    loadPosts(3);
+// Infinite scroll (up to 100 posts)
+let postsLoaded=10;
+window.addEventListener("scroll",()=>{
+  if(window.innerHeight + window.scrollY >= document.body.offsetHeight-200 && postsLoaded<100){
+    loadPosts(5);
+    postsLoaded+=5;
   }
 });
 
