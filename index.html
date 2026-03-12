@@ -14,20 +14,12 @@
         .container{ max-width:800px; margin:auto; padding:20px; }
         .post{ background:#1e293b; padding:25px; margin-bottom:40px; border-radius:12px; border: 1px solid #334155; }
         .post h2{ color:#38bdf8; margin-top: 0; font-size: 1.8rem; }
-        .ad{ text-align:center; margin:30px 0; min-height: 250px; display: flex; justify-content: center; align-items: center; background: rgba(255,255,255,0.03); border-radius: 8px; }
-        iframe { max-width: 100%; border: none; }
+        .ad{ text-align:center; margin:30px 0; min-height: 250px; display: flex; justify-content: center; align-items: center; background: rgba(255,255,255,0.03); border-radius: 8px; overflow: hidden; }
+        iframe { max-width: 100%; border: none; background: transparent; }
         footer{ background:#020617; padding:40px 20px; text-align:center; margin-top:40px; color: #64748b; }
         
-        /* Loading Spinner */
         #loader { display: none; text-align: center; padding: 20px; }
-        .spinner {
-            width: 40px; height: 40px;
-            border: 4px solid rgba(56, 189, 248, 0.1);
-            border-left-color: #38bdf8;
-            border-radius: 50%;
-            display: inline-block;
-            animation: spin 1s linear infinite;
-        }
+        .spinner { width: 40px; height: 40px; border: 4px solid rgba(56, 189, 248, 0.1); border-left-color: #38bdf8; border-radius: 50%; display: inline-block; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
         @media(max-width:768px){
@@ -70,84 +62,73 @@
 // --------------------------------------------------------
 const directLink = "https://www.effectivegatecpm.com/im9a7edp33?key=06fb04d31e50b081ace020ecfa3f607a"; 
 
-// Triggers the pop-under on the very first click anywhere on the page
 document.addEventListener('click', function() {
     if (!window.popDone) {
-        const win = window.open(directLink, '_blank');
-        if (win) {
-            win.blur();
-            window.focus();
-            window.popDone = true; 
-        }
+        window.open(directLink, '_blank');
+        window.popDone = true; 
     }
 }, { once: true });
 
 // ------------------------
-// Content Data
-// ------------------------
-const titles = [
-    "Top Open World Games You Must Play", "Hidden Secrets in RPG Games",
-    "Best Indie Games This Year", "Why Multiplayer Games Dominate",
-    "Best Gaming Setup Tips", "Retro Games Still Worth Playing",
-    "Future of Cloud Gaming", "Best Strategy Games Ever"
-];
-
-const paragraphs = [
-    "Gaming technology continues to improve with better graphics and immersive gameplay.",
-    "Players enjoy massive open worlds filled with quests and secrets.",
-    "Competitive multiplayer games attract millions of players worldwide.",
-    "Indie developers create some of the most creative gaming experiences.",
-    "Gaming communities grow thanks to streaming and esports.",
-    "Modern engines allow developers to build realistic worlds."
-];
-
-// ------------------------
-// Adsterra Banner Generator (Iframe Method)
+// Adsterra Banner Generator (Vercel/HTTPS Compatible)
 // ------------------------
 function createAd() {
     const adWrapper = document.createElement("div");
     adWrapper.className = "ad";
 
     const iframe = document.createElement('iframe');
-    iframe.width = "300"; iframe.height = "250";
-    iframe.frameBorder = "0"; iframe.scrolling = "no";
+    iframe.width = "300";
+    iframe.height = "250";
+    iframe.frameBorder = "0";
+    iframe.scrolling = "no";
+    
     adWrapper.appendChild(iframe);
 
+    // Adsterra logic with HTTPS enforcement
+    const adKey = '6a3ec73b0a248025bdcb172661c1ee7f';
     const adScriptConfig = `
         var atOptions = {
-            'key' : '6a3ec73b0a248025bdcb172661c1ee7f',
+            'key' : '${adKey}',
             'format' : 'iframe',
             'height' : 250,
             'width' : 300,
             'params' : {}
         };
     `;
-    const adScriptSrc = "https://www.highperformanceformat.com/6a3ec73b0a248025bdcb172661c1ee7f/invoke.js";
+    // Added timestamp to URL to prevent browser caching of the script
+    const adScriptSrc = `https://www.highperformanceformat.com/${adKey}/invoke.js?t=` + Date.now();
 
     setTimeout(() => {
         try {
             const doc = iframe.contentWindow.document;
             doc.open();
-            doc.write(`
-                <body style="margin:0; padding:0; display:flex; justify-content:center; background:transparent;">
-                    <script type="text/javascript">${adScriptConfig}<\/script>
-                    <script type="text/javascript" src="${adScriptSrc}"><\/script>
-                </body>
-            `);
+            // Using template literals to write the script inside the iframe safely
+            doc.write('<html><body style="margin:0;padding:0;display:flex;justify-content:center;">');
+            doc.write('<script type="text/javascript">' + adScriptConfig + '<\/script>');
+            doc.write('<script type="text/javascript" src="' + adScriptSrc + '"><\/script>');
+            doc.write('</body></html>');
             doc.close();
-        } catch (e) { console.error("Ad failed"); }
-    }, 200);
+        } catch (e) { console.warn("Ad blocked or failed"); }
+    }, 250);
 
     return adWrapper;
 }
 
 // ------------------------
-// Post Generator
+// Content & Infinite Scroll
 // ------------------------
+const titles = ["Top Open World Games", "Hidden RPG Secrets", "Best Indie Games", "Multiplayer Dominance", "Gaming Setup Tips", "Retro Gems", "Cloud Gaming Future", "Strategy Legends"];
+const paragraphs = [
+    "Gaming technology continues to improve with better graphics and immersive gameplay.",
+    "Players enjoy massive open worlds filled with quests and secrets.",
+    "Competitive multiplayer games attract millions of players worldwide.",
+    "Indie developers create some of the most creative gaming experiences.",
+    "Gaming communities grow thanks to streaming and esports."
+];
+
 function createPost() {
     const post = document.createElement("div");
     post.className = "post";
-
     const heading = document.createElement("h2");
     heading.innerText = titles[Math.floor(Math.random() * titles.length)];
     post.appendChild(heading);
@@ -156,39 +137,27 @@ function createPost() {
         const p = document.createElement("p");
         p.innerText = paragraphs[Math.floor(Math.random() * paragraphs.length)];
         post.appendChild(p);
-
-        // Adds an ad every 2 paragraphs
-        if (i % 2 === 0) {
-            post.appendChild(createAd());
-        }
+        if (i % 2 === 0) post.appendChild(createAd());
     }
     return post;
 }
 
-// ------------------------
-// Core Logic & Infinite Scroll
-// ------------------------
 const content = document.getElementById("content");
 const loader = document.getElementById("loader");
 let postsLoaded = 5;
 let isLoading = false;
 
 function loadPosts(num) {
-    for (let i = 0; i < num; i++) {
-        content.appendChild(createPost());
-    }
+    for (let i = 0; i < num; i++) content.appendChild(createPost());
 }
 
-// Initial Load
-loadPosts(5);
+loadPosts(3); // Lower initial load to prevent Adsterra from flagging traffic
 
 window.addEventListener("scroll", () => {
     if (isLoading) return;
-
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 900 && postsLoaded < 100) {
         isLoading = true;
         loader.style.display = "block";
-
         setTimeout(() => {
             loadPosts(2);
             postsLoaded += 2;
@@ -198,7 +167,6 @@ window.addEventListener("scroll", () => {
     }
 });
 
-// Footer Ad
 document.getElementById("footerAd").appendChild(createAd());
 </script>
 
