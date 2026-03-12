@@ -1,73 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>HighTech Gamer – Gaming News & Guides</title>
-
 <meta name="description" content="Gaming news, reviews, and guides for PC, console and indie games.">
-
 <style>
-
-body{
-font-family:Arial, sans-serif;
-margin:0;
-background:#0f172a;
-color:white;
+body { font-family: Arial, sans-serif; margin:0; background:#0f172a; color:white; }
+header{ background:#020617; padding:20px; text-align:center; }
+nav{ background:#1e293b; padding:10px; text-align:center; }
+nav a{ color:white; margin:10px; text-decoration:none; }
+.container{ max-width:1000px; margin:auto; padding:20px; }
+.post{ background:#1e293b; padding:20px; margin-bottom:30px; border-radius:8px; }
+.post h2{ color:#38bdf8; }
+.ad{ text-align:center; margin:30px 0; }
+footer{ background:#020617; padding:20px; text-align:center; margin-top:40px; }
+@media(max-width:768px){
+.container{ padding:15px; }
+.post{ padding:15px; }
 }
-
-header{
-background:#020617;
-padding:20px;
-text-align:center;
-}
-
-nav{
-background:#1e293b;
-padding:10px;
-text-align:center;
-}
-
-nav a{
-color:white;
-margin:10px;
-text-decoration:none;
-}
-
-.container{
-max-width:1000px;
-margin:auto;
-padding:20px;
-}
-
-.post{
-background:#1e293b;
-padding:20px;
-margin-bottom:30px;
-border-radius:8px;
-}
-
-.post h2{
-color:#38bdf8;
-}
-
-.ad{
-text-align:center;
-margin:30px 0;
-}
-
-footer{
-background:#020617;
-padding:20px;
-text-align:center;
-margin-top:40px;
-}
-
 </style>
 </head>
-
 <body>
 
 <header>
@@ -91,9 +44,7 @@ margin-top:40px;
 </footer>
 
 <script>
-
-// Article titles and paragraphs
-const titles=[
+const titles = [
 "Top Open World Games You Must Play",
 "Hidden Secrets in RPG Games",
 "Best Indie Games This Year",
@@ -106,7 +57,7 @@ const titles=[
 "Upcoming Games to Watch"
 ];
 
-const paragraphs=[
+const paragraphs = [
 "Gaming technology continues to improve with better graphics and immersive gameplay.",
 "Players enjoy massive open worlds filled with quests and secrets.",
 "Competitive multiplayer games attract millions of players worldwide.",
@@ -117,14 +68,12 @@ const paragraphs=[
 "Many gamers build high performance setups for better gameplay."
 ];
 
-// Function to create an Adsterra ad
-function createAd(){
+function createAd() {
+  const ad = document.createElement("div");
+  ad.className = "ad";
 
-let ad=document.createElement("div");
-ad.className="ad";
-
-let script1=document.createElement("script");
-script1.innerHTML=`
+  const script1 = document.createElement("script");
+  script1.innerHTML = `
 atOptions = {
 'key' : '6a3ec73b0a248025bdcb172661c1ee7f',
 'format' : 'iframe',
@@ -134,70 +83,55 @@ atOptions = {
 };
 `;
 
-let script2=document.createElement("script");
-script2.src="https://www.highperformanceformat.com/6a3ec73b0a248025bdcb172661c1ee7f/invoke.js";
+  const script2 = document.createElement("script");
+  script2.src = "https://www.highperformanceformat.com/6a3ec73b0a248025bdcb172661c1ee7f/invoke.js";
 
-ad.appendChild(script1);
-ad.appendChild(script2);
+  ad.appendChild(script1);
+  ad.appendChild(script2);
 
-return ad;
-
+  return ad;
 }
 
-// Function to create a single post with ads every 2 paragraphs
-function createPost(){
+function createPost() {
+  const post = document.createElement("div");
+  post.className = "post";
 
-let post=document.createElement("div");
-post.className="post";
+  const heading = document.createElement("h2");
+  heading.innerText = titles[Math.floor(Math.random() * titles.length)];
+  post.appendChild(heading);
 
-let title=titles[Math.floor(Math.random()*titles.length)];
+  for (let i = 1; i <= 6; i++) {
+    const p = document.createElement("p");
+    p.innerText = paragraphs[Math.floor(Math.random() * paragraphs.length)];
+    post.appendChild(p);
 
-let heading=document.createElement("h2");
-heading.innerText=title;
-post.appendChild(heading);
+    if (i % 2 === 0) {
+      post.appendChild(createAd());
+    }
+  }
 
-for(let i=1;i<=6;i++){
-
-let p=document.createElement("p");
-p.innerText=paragraphs[Math.floor(Math.random()*paragraphs.length)];
-post.appendChild(p);
-
-if(i%2===0){
-post.appendChild(createAd());
+  return post;
 }
 
-}
-
-return post;
-
-}
-
-// Load multiple posts
-function loadPosts(num){
-
-let content=document.getElementById("content");
-
-for(let i=0;i<num;i++){
-content.appendChild(createPost());
-}
-
+function loadPosts(num) {
+  const content = document.getElementById("content");
+  for (let i = 0; i < num; i++) {
+    content.appendChild(createPost());
+  }
 }
 
 // Initial load
 loadPosts(6);
 
-// Infinite scroll for more posts
-window.addEventListener("scroll",()=>{
-
-if(window.innerHeight + window.scrollY >= document.body.offsetHeight-200){
-loadPosts(3);
-}
-
+// Infinite scroll
+window.addEventListener("scroll", () => {
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+    loadPosts(3);
+  }
 });
 
 // Footer ad
 document.getElementById("footerAd").appendChild(createAd());
-
 </script>
 
 </body>
