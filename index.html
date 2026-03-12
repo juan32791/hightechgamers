@@ -12,7 +12,7 @@
 <style>
 
 body{
-font-family:Arial;
+font-family:Arial, sans-serif;
 margin:0;
 background:#0f172a;
 color:white;
@@ -86,15 +86,13 @@ margin-top:40px;
 <div class="container" id="content"></div>
 
 <footer>
-
 <div class="ad" id="footerAd"></div>
-
 <p>© 2026 HighTech Gamer</p>
-
 </footer>
 
 <script>
 
+// Article titles and paragraphs
 const titles=[
 "Top Open World Games You Must Play",
 "Hidden Secrets in RPG Games",
@@ -119,6 +117,7 @@ const paragraphs=[
 "Many gamers build high performance setups for better gameplay."
 ];
 
+// Function to create an Adsterra ad
 function createAd(){
 
 let ad=document.createElement("div");
@@ -127,7 +126,7 @@ ad.className="ad";
 let script1=document.createElement("script");
 script1.innerHTML=`
 atOptions = {
-'key' : 'eb64514c8ad66e0c2f82e4a5fee98217',
+'key' : '6a3ec73b0a248025bdcb172661c1ee7f',
 'format' : 'iframe',
 'height' : 250,
 'width' : 300,
@@ -136,7 +135,7 @@ atOptions = {
 `;
 
 let script2=document.createElement("script");
-script2.src="https://www.highperformanceformat.com/eb64514c8ad66e0c2f82e4a5fee98217/invoke.js";
+script2.src="https://www.highperformanceformat.com/6a3ec73b0a248025bdcb172661c1ee7f/invoke.js";
 
 ad.appendChild(script1);
 ad.appendChild(script2);
@@ -145,6 +144,7 @@ return ad;
 
 }
 
+// Function to create a single post with ads every 2 paragraphs
 function createPost(){
 
 let post=document.createElement("div");
@@ -154,20 +154,16 @@ let title=titles[Math.floor(Math.random()*titles.length)];
 
 let heading=document.createElement("h2");
 heading.innerText=title;
-
 post.appendChild(heading);
 
 for(let i=1;i<=6;i++){
 
 let p=document.createElement("p");
 p.innerText=paragraphs[Math.floor(Math.random()*paragraphs.length)];
-
 post.appendChild(p);
 
 if(i%2===0){
-
 post.appendChild(createAd());
-
 }
 
 }
@@ -176,30 +172,30 @@ return post;
 
 }
 
+// Load multiple posts
 function loadPosts(num){
 
 let content=document.getElementById("content");
 
 for(let i=0;i<num;i++){
-
 content.appendChild(createPost());
-
 }
 
 }
 
+// Initial load
 loadPosts(6);
 
+// Infinite scroll for more posts
 window.addEventListener("scroll",()=>{
 
 if(window.innerHeight + window.scrollY >= document.body.offsetHeight-200){
-
 loadPosts(3);
-
 }
 
 });
 
+// Footer ad
 document.getElementById("footerAd").appendChild(createAd());
 
 </script>
