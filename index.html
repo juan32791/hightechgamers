@@ -1,157 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HighTech Gamer – Gaming News & Guides</title>
-<meta name="description" content="HighTech Gamer – auto-generated gaming articles with Adsterra banners every 2 paragraphs, mobile-optimized and SEO-ready.">
-<style>
-body { font-family: Arial, sans-serif; margin:0; background:#0f172a; color:white; }
-header{ background:#020617; padding:20px; text-align:center; }
-nav{ background:#1e293b; padding:10px; text-align:center; }
-nav a{ color:white; margin:10px; text-decoration:none; }
-.container{ max-width:1000px; margin:auto; padding:20px; }
-.post{ background:#1e293b; padding:20px; margin-bottom:30px; border-radius:8px; }
-.post h2{ color:#38bdf8; }
-.ad{ text-align:center; margin:30px 0; }
-footer{ background:#020617; padding:20px; text-align:center; margin-top:40px; }
-@media(max-width:768px){
-.container{ padding:15px; }
-.post{ padding:15px; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HighTech Gamer – Gaming News & Guides</title>
+    <meta name="description" content="HighTech Gamer – auto-generated gaming articles with Adsterra banners every 2 paragraphs, mobile-optimized and SEO-ready.">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; background:#0f172a; color:white; line-height: 1.6; }
+        header{ background:#020617; padding:40px 20px; text-align:center; border-bottom: 3px solid #38bdf8; }
+        nav{ background:#1e293b; padding:15px; text-align:center; position: sticky; top: 0; z-index: 100; }
+        nav a{ color:#cbd5e1; margin:0 15px; text-decoration:none; font-weight: bold; transition: color 0.3s; }
+        nav a:hover{ color:#38bdf8; }
+        .container{ max-width:800px; margin:auto; padding:20px; }
+        .post{ background:#1e293b; padding:25px; margin-bottom:40px; border-radius:12px; border: 1px solid #334155; }
+        .post h2{ color:#38bdf8; margin-top: 0; font-size: 1.8rem; }
+        .ad{ text-align:center; margin:30px 0; min-height: 250px; display: flex; justify-content: center; align-items: center; }
+        iframe { max-width: 100%; border: none; }
+        footer{ background:#020617; padding:40px 20px; text-align:center; margin-top:40px; color: #64748b; }
+        @media(max-width:768px){
+            .container{ padding:15px; }
+            .post{ padding:15px; }
+            nav a { display: inline-block; margin: 5px; font-size: 0.9rem; }
+        }
+    </style>
 </head>
 <body>
 
 <header>
-<h1>HighTech Gamer</h1>
-<p>Gaming News • Reviews • Guides</p>
+    <h1>HighTech Gamer</h1>
+    <p>Gaming News • Reviews • Guides</p>
 </header>
 
 <nav>
-<a href="#">Home</a>
-<a href="#">PC Gaming</a>
-<a href="#">Console</a>
-<a href="#">Indie Games</a>
-<a href="#">Reviews</a>
+    <a href="#">Home</a>
+    <a href="#">PC Gaming</a>
+    <a href="#">Console</a>
+    <a href="#">Indie Games</a>
+    <a href="#">Reviews</a>
 </nav>
 
 <div class="container" id="content"></div>
 
 <footer>
-<div class="ad" id="footerAd"></div>
-<p>© 2026 HighTech Gamer</p>
+    <div class="ad" id="footerAd"></div>
+    <p>© 2026 HighTech Gamer - All Rights Reserved</p>
 </footer>
 
 <script>
 // ------------------------
-// Auto-generated content
+// Content Data
 // ------------------------
-const titles=[
-"Top Open World Games You Must Play",
-"Hidden Secrets in RPG Games",
-"Best Indie Games This Year",
-"Why Multiplayer Games Dominate",
-"Best Gaming Setup Tips",
-"Retro Games Still Worth Playing",
-"Future of Cloud Gaming",
-"Best Strategy Games Ever",
-"Gaming Graphics Evolution",
-"Upcoming Games to Watch",
-"Most Addictive Mobile Games",
-"How VR is Changing Gaming",
-"Best Console Games This Year",
-"Top Indie Developers to Follow",
-"Gaming Hardware Upgrades You Need"
+const titles = [
+    "Top Open World Games You Must Play", "Hidden Secrets in RPG Games",
+    "Best Indie Games This Year", "Why Multiplayer Games Dominate",
+    "Best Gaming Setup Tips", "Retro Games Still Worth Playing",
+    "Future of Cloud Gaming", "Best Strategy Games Ever",
+    "Gaming Graphics Evolution", "Upcoming Games to Watch",
+    "Most Addictive Mobile Games", "How VR is Changing Gaming",
+    "Best Console Games This Year", "Top Indie Developers to Follow",
+    "Gaming Hardware Upgrades You Need"
 ];
 
-const paragraphs=[
-"Gaming technology continues to improve with better graphics and immersive gameplay.",
-"Players enjoy massive open worlds filled with quests and secrets.",
-"Competitive multiplayer games attract millions of players worldwide.",
-"Indie developers create some of the most creative gaming experiences.",
-"Gaming communities grow thanks to streaming and esports.",
-"Modern engines allow developers to build realistic worlds.",
-"Exploration and storytelling make games unforgettable.",
-"Many gamers build high performance setups for better gameplay.",
-"Upcoming releases promise new innovations and challenges.",
-"Game streaming and eSports are more popular than ever."
+const paragraphs = [
+    "Gaming technology continues to improve with better graphics and immersive gameplay.",
+    "Players enjoy massive open worlds filled with quests and secrets.",
+    "Competitive multiplayer games attract millions of players worldwide.",
+    "Indie developers create some of the most creative gaming experiences.",
+    "Gaming communities grow thanks to streaming and esports.",
+    "Modern engines allow developers to build realistic worlds.",
+    "Exploration and storytelling make games unforgettable.",
+    "Many gamers build high performance setups for better gameplay.",
+    "Upcoming releases promise new innovations and challenges.",
+    "Game streaming and eSports are more popular than ever."
 ];
 
 // ------------------------
-// Adsterra script creator
+// Adsterra Dynamic Generator
 // ------------------------
-function createAd(){
-  const ad=document.createElement("div");
-  ad.className="ad";
+function createAd() {
+    const adWrapper = document.createElement("div");
+    adWrapper.className = "ad";
 
-  // Script must be created via DOM for dynamic execution
-  const script1=document.createElement("script");
-  script1.innerHTML=`
-atOptions = {
-'key' : '6a3ec73b0a248025bdcb172661c1ee7f',
-'format' : 'iframe',
-'height' : 250,
-'width' : 300,
-'params' : {}
-};
-`;
-  const script2=document.createElement("script");
-  script2.src="https://www.highperformanceformat.com/6a3ec73b0a248025bdcb172661c1ee7f/invoke.js";
+    // Create iframe to isolate Adsterra scripts
+    const iframe = document.createElement('iframe');
+    iframe.width = "300";
+    iframe.height = "250";
+    iframe.frameBorder = "0";
+    iframe.scrolling = "no";
+    
+    adWrapper.appendChild(iframe);
 
-  ad.appendChild(script1);
-  ad.appendChild(script2);
+    // Adsterra Configuration
+    const adScriptConfig = `
+        var atOptions = {
+            'key' : '6a3ec73b0a248025bdcb172661c1ee7f',
+            'format' : 'iframe',
+            'height' : 250,
+            'width' : 300,
+            'params' : {}
+        };
+    `;
+    const adScriptSrc = "https://www.highperformanceformat.com/6a3ec73b0a248025bdcb172661c1ee7f/invoke.js";
 
-  return ad;
+    // Injecting scripts into the Iframe
+    setTimeout(() => {
+        const doc = iframe.contentWindow.document;
+        doc.open();
+        doc.write(`
+            <body style="margin:0; padding:0; display:flex; justify-content:center;">
+                <script type="text/javascript">${adScriptConfig}<\/script>
+                <script type="text/javascript" src="${adScriptSrc}"><\/script>
+            </body>
+        `);
+        doc.close();
+    }, 100);
+
+    return adWrapper;
 }
 
 // ------------------------
-// Create single post
+// Post Generator
 // ------------------------
-function createPost(){
-  const post=document.createElement("div");
-  post.className="post";
+function createPost() {
+    const post = document.createElement("div");
+    post.className = "post";
 
-  const heading=document.createElement("h2");
-  heading.innerText=titles[Math.floor(Math.random()*titles.length)];
-  post.appendChild(heading);
+    const heading = document.createElement("h2");
+    heading.innerText = titles[Math.floor(Math.random() * titles.length)];
+    post.appendChild(heading);
 
-  for(let i=1;i<=6;i++){
-    const p=document.createElement("p");
-    p.innerText=paragraphs[Math.floor(Math.random()*paragraphs.length)];
-    post.appendChild(p);
+    // Add 6 paragraphs, with an ad every 2 paragraphs
+    for (let i = 1; i <= 6; i++) {
+        const p = document.createElement("p");
+        p.innerText = paragraphs[Math.floor(Math.random() * paragraphs.length)];
+        post.appendChild(p);
 
-    if(i%2===0){
-      post.appendChild(createAd());
+        if (i % 2 === 0) {
+            post.appendChild(createAd());
+        }
     }
-  }
 
-  return post;
+    return post;
 }
 
 // ------------------------
-// Load multiple posts
+// Core Logic
 // ------------------------
-function loadPosts(num){
-  const content=document.getElementById("content");
-  for(let i=0;i<num;i++){
-    content.appendChild(createPost());
-  }
+function loadPosts(num) {
+    const content = document.getElementById("content");
+    for (let i = 0; i < num; i++) {
+        content.appendChild(createPost());
+    }
 }
 
-// Initial posts
-loadPosts(10);
+// Initial Load
+loadPosts(5);
 
-// Infinite scroll (up to 100 posts)
-let postsLoaded=10;
-window.addEventListener("scroll",()=>{
-  if(window.innerHeight + window.scrollY >= document.body.offsetHeight-200 && postsLoaded<100){
-    loadPosts(5);
-    postsLoaded+=5;
-  }
+// Infinite Scroll Logic
+let postsLoaded = 5;
+let isThrottled = false;
+
+window.addEventListener("scroll", () => {
+    if (isThrottled) return;
+
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 800 && postsLoaded < 100) {
+        isThrottled = true;
+        loadPosts(2);
+        postsLoaded += 2;
+        
+        // Prevents too many simultaneous calls
+        setTimeout(() => { isThrottled = false; }, 500);
+    }
 });
 
-// Footer ad
+// Load Footer Ad
 document.getElementById("footerAd").appendChild(createAd());
 </script>
 
